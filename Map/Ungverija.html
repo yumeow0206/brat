@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Ungverija Map</title>
+	<style>
+		body {
+			color: #ccc;
+			background: #313131;
+			padding: 20px;
+		}
+		rect:hover {
+			cursor: url(https://map.hkiweb.xyz/get.cur) 10 15, crosshair;
+		}
+		path:hover {
+			fill: #282828;
+			cursor: url(https://map.hkiweb.xyz/set.cur) 10 10, crosshair;
+		}
+		label {
+			vertical-align: bottom;
+		}
+		svg {
+	    		margin-top: 10px;
+		}
+		#edit_input {
+			color: white;
+			background-color: #444;
+			border: dotted;
+			border-color: #444;
+			border-bottom-color: white;
+			border-radius: 2px;
+			padding-left: 15px;
+			width: 180px;
+			height: 25px;
+			margin-right: 20px
+		}
+		::placeholder {
+			color: #bbb;
+		}
+	</style>
+</head>
+<body>
+	<section class="page-header">
+		<h1 style="display: inline-block;">Ungverija (佩牙利斯)</h1> 
+		by DI-小魚餌 <button class="download" onclick="converDownload()" style=" margin-left: 20px; color: currentcolor; background-color: darkslategrey; border: dashed; border-color: cadetblue; border-radius: 55px; padding: 10px; ">💾 Save Image As PNG </button><br/>
+		<input id="edit_input" placeholder="🔖 Enter to replace legend">
+		<label><input checked name="language" type="radio" value="no"> Off,</label> <label><input name="language" type="radio" value="en"> English,</label> <label><input name="language" type="radio" value="zh"> 中文,</label> <label><input name="language" type="radio" value="jp"> 日本語,</label> <label><input name="language" type="radio" value="kr" disabled> 한국어</label>
+		</section>
+	<section class="main-content">
+		 <svg viewbox="0 0 1366 768" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<style>
+					.cls-1 {
+						fill: #3b3b3b;
+					}
+					.cls-1, .cls-10, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+						stroke: #1a1a1a;
+						stroke-miterlimit: 10;
+					}
+					.cls-2 {
+						fill: #1b1464;
+					}
+					.cls-3 {
+						fill: #006837;
+					}
+					.cls-4 {
+						fill: #0071bc;
+					}
+					.cls-5 {
+						fill: #c1272d;
+					}
+					.cls-6 {
+						fill: #c71585;
+					}
+					.cls-7 {
+						fill: #662d91;
+					}
+					.cls-8 {
+						fill: #f15a24;
+					}
+					.cls-9 {
+						fill: #ff7bac;
+					}
+					.cls-10 {
+						fill: #2f4f4f;
+					}
+					.cls-11 {
+						fill: #AAA;
+						filter: drop-shadow(0px 0px 1px rgba(0,0,0,1));
+						font-size: 16px;
+					}
+					.cls-11, .cls-12 {
+						font-family: MicrosoftJhengHeiRegular, Microsoft JhengHei;
+					}
+					.cls-12 {
+						font-size: 14px;
+					}
+					.cls-12, .cls-13, .cls-14 {
+						fill: #fff8;
+						drop-shadow(5px 5px 5px rgba(0,0,0,0.5))
+					}
+					.cls-13 {
+						font-size: 18px;
+					}
+					.cls-13, .cls-14 {
+						font-family: MicrosoftJhengHeiBold, Microsoft JhengHei;
+					}
+					.cls-14 {
+						font-size: 24px;
+					}
+					.map_name {
+						display: none;
+					}
+				</style>
+			</defs>
+			<g id="色票">
+				<rect class="cls-1" height="20" id="中立" width="20" x="10.5" y="10.5"></rect>
+				<text class="cls-11" transform="translate(42.23 25.53)">中立</text>
+				<rect class="cls-2" height="20" id="和平" width="20" x="10.5" y="40.5"></rect>
+				<text class="cls-11" transform="translate(41.23 55.53)">和平</text>
+				<rect class="cls-3" height="20" id="我方" width="20" x="10.5" y="70.5"></rect>
+				<text class="cls-11" transform="translate(41.23 85.53)">我方</text>
+				<rect class="cls-4" height="20" id="友方" width="20" x="10.5" y="100.5"></rect>
+				<text class="cls-11" transform="translate(41.23 115.53)">友方</text>
+				<rect class="cls-5" height="20" id="敵方" width="20" x="10.5" y="130.5"></rect>
+				<text class="cls-11" transform="translate(42.23 145.53)">敵方</text>
+				<rect class="cls-6" height="20" id="深" width="20" x="10.5" y="160.5"></rect>
+				<text class="cls-11" transform="translate(42.23 175.53)">N/A</text>
+				<rect class="cls-7" height="20" id="紫" width="20" x="10.5" y="190.5"></rect>
+				<text class="cls-11" transform="translate(42.23 205.53)">N/A</text>
+				<rect class="cls-8" height="20" id="橘" width="20" x="10.5" y="220.5"></rect>
+				<text class="cls-11" transform="translate(42.23 235.53)">N/A</text>
+				<rect class="cls-9" height="20" id="粉" width="20" x="10.5" y="250.5"></rect>
+				<text class="cls-11" transform="translate(42.23 265.53)">N/A</text>
+				<rect class="cls-10" height="20" id="灰" width="20" x="10.5" y="280.5"></rect>
+				<text class="cls-11" transform="translate(42.23 295.53)">N/A</text>
+			</g>
+			<g id="瓦裡">
+				<path class="cls-1" d="M820,138c-18,16-6,20,10,16,22.65-5.66,25.23,10.85,42,36,12,18,16-6,25-5,15.93,1.77,12,2,33-9,28.15-14.75-11-22-6-32,12.63-25.25-8.27-13.22,6-37,12-20,17.57-23.25-23-38-55-20-32,6-56,9s.82,16.9-6,24C821,127,831.82,127.5,820,138Z"></path>
+			</g>
+			<g id="卡拉">
+				<path class="cls-1" d="M942,84c5,10.69-3.5,7.5,14.56,16.24,5.55,2.69,11.58-2.73,16.44-6.24,18-13,15,7,38-37,16.61-31.77,26-33-17-24s-9.32,11.91-28.16,21.45c-14.13,7.16-40.57,7.48-39.34,18C926.91,76,937.69,74.81,942,84Z"></path>
+			</g>
+			<g id="迪斯">
+				<path class="cls-1" d="M792,95c8.21,16.42,15.14,23.77,34,20,5-1,16.34-16.19,14-20-8-13-5-19,6-20s23.4-6.26,10-21c-10-11-8,6-25,5s-31-6.86-38-15-27-10-31-4,7,14,1,25,3,10,14,11S788,87,792,95Z"></path>
+			</g>
+			<g id="卡摩爾">
+				<path class="cls-1" d="M1035,51c-5.28,12.33-3,24,13,23s19,15,24,17,11.92-20,24.46-20c15.54,0,31.18-23.75,18.54-35s-19,0-35-12-45-4-47.87,2.07C1022.59,46.29,1038,44,1035,51Z"></path>
+			</g>
+			<g id="凱爾佳">
+				<path class="cls-1" d="M941,157c11,24,33.79,13.93,43,5,9.4-9.12,16-5,19,0,4.4,7.33,16.72,3.65,26.67,16.09,18.33,22.91,14.21-7,30.77-7S1080,154,1076,142s8-6-6-41c-14.27-35.68-28.63-14.06-40.33-26.51C1017,61,1040,43,1023,48c-4.45,1.31-18,27-24,39-4,8-17,2-29,14-16,16-21.69-16.42-35.35,6.79S942,122,932,138,935.7,145.43,941,157Z"></path>
+			</g>
+			<g id="塔克尼費爾">
+				<path class="cls-1" d="M1043,205c26.46,42.4,32.12,44,16,44-10,0-5.65-13.22-19-25-17-15-21,11-27,11-5,0-9-14-14-17s-6.2,3-19.6,3.5S953.48,216,947,221s-10,23-16,23c-9,0-11-12-19-15s-17.61-6.5-27.3-15.25S869,220,866,210s16-7,22-11,3-11.27,14-10c26,3,15-14,52-12,39.94,2.16,30.66-24.63,46-11C1018,182,1013.2,157.26,1043,205Z"></path>
+			</g>
+			<g id="布部林">
+				<path class="cls-1" d="M1048,189c-10,6-5,7,10,29,13,19,7.06,19.68,23,18,19-2,9-17,45-15,52.93,2.94,55,0,47-14-9.77-17.1,11-15-2-34s-18.7-.83-31.35-16.42S1107,152,1094,141s-17-11-12,1,2.19,32.63-17,34C1051,177,1053,186,1048,189Z"></path>
+			</g>
+			<g id="杜敏">
+				<path class="cls-1" d="M1179,192c-9.47,16.83,7.91,12.36,3,32-1,4,25,39.53,31,40,64,5,38-15,61-18,26.94-3.51,22.61-32.24,18-43-6-14,13-31-19-27-34.26,4.28-24.84-31.23-39-11-21,30-15.25-13.05-40-8C1157.35,164.48,1188,176,1179,192Z"></path>
+			</g>
+			<g id="拓倫">
+				<path class="cls-1" d="M1160,399c-.77,3.07,37.83,34.68,41,30,21-31,50-10,63-31s-39.21-41-39.61-58S1253,285,1249,274s-28,0-41-7-32-51-46-40.43c-5.51,4.17,19,30.43-8,41.43-6.74,2.75-24,3.93-15,12,20,18-8,27.17,0,33,11,8,36,35,35,45C1172.69,371.09,1161,395,1160,399Z"></path>
+			</g>
+			<g id="圖和拉">
+				<path class="cls-2" d="M888,234c-16,37-22,27-4,39,15.3,10.2-4,28,6,44s33.66,12.87,35,10c14-30,28-8,35.09-26,2.94-7.5,11.91-7,17.91-1,2.55,2.55,9.32-8.56,18-18,2.87-3.12-14-31-19-31-30.07,0-53,7.89-62-15C913.18,231.37,889.78,229.9,888,234Z"></path>
+			</g>
+			<g id="蘇瓦基">
+				<path class="cls-1" d="M961,247c26-1,20.8-6.09,42,31,8,14,4.41,13.47,26.67,17.92C1060,302,1034,289,1041,264c1.82-6.51,8.34-12.19,7-20-2.36-13.79-16.83-28.35-23-16-10,20-18,10-24-1s-6.52-2.12-21.76-2.06S953.13,219.08,948,227C937,244,935,248,961,247Z"></path>
+			</g>
+			<g id="裡斯沃">
+				<path class="cls-1" d="M1149,266c19.14-7.66,15-20,7-38-1.15-2.58-50-3-52,0-8.32,12.48-14,5-31,20s-17-7-27,14c-7.16,15-1,14,0,23,2.92,26.25,44.55.18,77,11,15,5,26,2,14-10C1120.72,269.72,1144,268,1149,266Z"></path>
+			</g>
+			<g id="謝爾瑪">
+				<path class="cls-1" d="M1113,368c-2,24,23,34,33,35,9.17.92,23-34,23-45,0-6.32-22-38.5-29.87-37.42C1130,321.86,1113.56,361.32,1113,368Z"></path>
+			</g>
+			<g id="普洛克">
+				<path class="cls-1" d="M1030,407c-11.14,24.75-14.67,19.25,3,41,13,16-8.27,10,41,7s29.93-23.79,56-19c6.35,1.17,17.44-25.84,10-29-22.14-9.41-44-27-23-62,25.54-42.57,25.43-51.74-46.58-44C986,310,1010,271,991,294c-8.16,9.87-12,4.65,23,55C1039,385,1039,387,1030,407Z"></path>
+			</g>
+			<g id="雷步爾">
+				<path class="cls-1" d="M1137.05,476.15c12.56,21.43-10,27.85,28.49,25.3C1199,499.24,1218.8,491.19,1198,469c-15-16,16-19-14-43-40.34-32.27-27-26-42.81,7C1125.84,465.05,1127,459,1137.05,476.15Z"></path>
+			</g>
+			<g id="登克爾">
+				<path class="cls-1" d="M1027,491c-8,14,67-16,88,2,18.68,16,26,11,20-9s-15.24-16.14-10-25c13-22-5-22-11-12-10.29,17.15-25,11-48,14S1040.1,468.08,1027,491Z"></path>
+			</g>
+			<g id="莫里">
+				<path class="cls-1" d="M728,112c8,20,5,16,21,18,13,1.63,12,13,31,13,28,0,27,9,43-20,5.65-10.25-9,4-25-10s-8.63-32.25-28-33c-26-1-9-18-9-23,0-14-25.07-5.42-26-2-3,11-19,24-10,24,6.71,0,4.26,9.37,0,15S725,104.51,728,112Z"></path>
+			</g>
+			<g id="白格納">
+				<path class="cls-1" d="M617,178c3,22,12-4,35,25,5.35,6.74,69,8,75,2,9.06-9.06,15.63-.22,24.47-9.47C773,173,812,197,822,178c8-15.1,25-3.23,25-14,0-17-33,7-44-14-4.76-9.09-33,7-48-13-5.53-7.38-45-2.37-44,2,7,32-20.09,23.44-41,19-33-7-16,4-40,7S616.15,171.73,617,178Z"></path>
+			</g>
+			<g id="安科德貝克">
+				<path class="cls-1" d="M527,139c6-10.64,11-9-5-37s-30.84-43.07,9-37c24,3.66,10-20,37-15,25.07,4.64,11-12.33,41-9,36,4,10,15,45,15,34,0,12.85,6.63,37,12,18,4-13,36-23,36-25.18,0-24,26.56-42,26-32-1-13.36,25.87-66,16C544,143,518,155,527,139Z"></path>
+			</g>
+			<g id="索維卡">
+				<path class="cls-1" d="M645,52c43-1,30,8,46,12,18.41,4.6-1,11,21,13,6.3.57,30.44-38.54,26-38-41,5,1-13-59-11-39,1.3-28.07.13-37,12.56S643,52.05,645,52Z"></path>
+			</g>
+			<g id="蒙特博姆">
+				<path class="cls-1" d="M551,152c37-2,37,7,58-12,16.91-15.3,22,6,40-19s21-2,40-26,11-13,32-13c6.87,0,4.66,4.45-1,12-3,4-.64,15,6,25,14,21-25.29,2.59-20,26,7,31-44-5-64,10-14.88,11.16-21,3-32,12s-33.07,3.44-51,6C552,174,546.88,152.22,551,152Z"></path>
+			</g>
+			<g id="克洛諾">
+				<path class="cls-1" d="M678,219c3,8,7,19,18,19,22,0,23.67,33.36,28,26,10-17,65-7,59,5-5.44,10.88-14,17-8,22s26,9,36-5,19.48-3.59,25.74-9.79S844,262,864,262c9,0,32-51,14-44-14,5.45-26-11-12-21,5.21-3.72-9.34-29.7-16-26-9,5-10.46-.14-18,3-12,5,2.24,18.37-38,16-51-3-29,13-50,14s-4,11-35,10S675.17,211.45,678,219Z"></path>
+			</g>
+			<g id="烏爾茲菲爾斯">
+				<path class="cls-1" d="M743,510c1,56-38.76,36.42-41,41-4.55,9.33-2.5,18.44,17,16,16-2,18,22.09,30,21,22-2,37,33,21,53-4.19,5.24,11.88,32.86,16,33,30,1,35,33,52,9s88.82-7.55,91-10c13-14.62-53-95-50-114s.16-1.65-21-8c-20-6-42,11-53-5-18.87-27.44-33-7-38-31C765.78,509.13,742.89,504,743,510Z"></path>
+			</g>
+			<g id="安托克斯爾">
+				<path class="cls-1" d="M674,608c-5,9-14,12,27,75,6.66,10.23,8,10,95,10,27,0,8-13-11-14-9.21-.48-23.66-36.56-21-39,12-11,8-45-13-46-27-1.29-6-25-51-23C694,571.27,678.13,600.57,674,608Z"></path>
+			</g>
+			<g id="米拉">
+				<path class="cls-1" d="M246,608c24.29,24.33,43.84-51.69,67-55,35-5,51-6,40,13-12.56,21.69,6,28-8,49-20.64,31-22,0-46,27-18.95,21.31-14-15-53,37-28.18,37.58-30,44-43,21s-46,10-5-43C236.7,607,239.91,601.91,246,608Z"></path>
+			</g>
+			<g id="卡多">
+				<path class="cls-1" d="M359,564c12-20-15-12,44.46-14.1C447,548.37,431,520,465,592c27.5,58.24,32.28,53.57-5,66-18,6-3.64,49.6-55,58-55,9-14-20-18-34-2.35-8.22-16.25-60.57-27-74C352,598,351.85,575.91,359,564Z"></path>
+			</g>
+			<g id="阿拉瓦奇">
+				<path class="cls-1" d="M353,613c-31,44-25,6-52,34-21.62,22.42-17.55-7.12-38,20-46,61-53,44-20,73,9.88,8.68,10-20,35-20,27,0,2,25,45,23,25-1.16,65-52,59-63S361.15,601.44,353,613Z"></path>
+			</g>
+			<g id="凡爾漢姆">
+				<path class="cls-1" d="M914,504c-36,63-41,44.87-9.1,94.75C946,663,939,690,941,686c27.21-54.41,54.06-56.65,29-136-6-19-17-13-34-36C935.16,512.86,922,514,914,504Z"></path>
+			</g>
+			<g id="漢斯">
+				<path class="cls-1" d="M182.5,239.5c8.61-3.31,25-9,29,13s16,52,16,52-81,86-97,86c-10.2,0-7-3-11-11s-16,4-18-11,8.21-16.62,17-27c11-13-8.44-26.58-1-37,5-7,36.74,3.57,45-8,15-21-13-15-17-16C135.61,278,169.5,244.5,182.5,239.5Z"></path>
+			</g>
+			<g id="瓦勒海姆">
+				<path class="cls-1" d="M140.5,391.5s28.6-5.26,39,20c7,17,65-24,63-40-3.13-25,25.31-38,26-47,2-26-19-26-36-20-2.79,1-31.81,35.29-54,57C157,382.55,140.5,391.5,140.5,391.5Z"></path>
+			</g>
+			<g id="維斯貝格">
+				<path class="cls-1" d="M205.5,414.5s51-8,34,18-10,33-10,33,22,11.21,39-9c16-19,66.43,8.92,57-20-7.5-23-8-32,8-48,11.6-11.6,15.47-15.69,11-24-7-13,9-15,9-26,0-9.22-12-48-23-31-9.67,14.95-23,11-39,10-11.16-.7-38.85,29.39-43,41C243.5,372.5,260.5,380.5,205.5,414.5Z"></path>
+			</g>
+			<g id="布裡納">
+				<path class="cls-1" d="M369.5,278.5C358.37,281,357,294,346,303c30,54-4.85,45.08,4,61,5,9,2,13.5-11.27,26.5s-17.23,20-9.23,42,27,18.92,40,6.46,47-3.46,63-8.46c6.17-1.93,25.77-15.86,23.5-29.5-2-12-2-20,7-28,6.45-5.73-7.46-13.72.5-25.5C476,329,458.05,319,462,308c4.5-12.5,13.93-16.77,9-18-8-2-50-2-71.5,1.5C370.47,296.23,396.5,272.5,369.5,278.5Z"></path>
+			</g>
+			<g id="努爾圖">
+				<path class="cls-1" d="M860,440c36,79,32,26,57.82,58.69C931.35,515.82,927,496,950,520c26.42,27.57,23.51,7,53.35-35.62C1047,422,1001,449,1021,412c9.51-17.59-27-17-31-8-21.62,48.64-49,36-59,24-17.2-20.64-19-2-29-16-5.2-7.28,16-36-4-29-10.17,3.56-44.54-1-46,2C837,416,849.19,416.27,860,440Z"></path>
+			</g>
+			<g id="茲拉赫">
+				<path class="cls-1" d="M921,342c-34,49-2,24-12,55s10.92,4.64,25,24.82S971,433,981,410c19.61-45.11,74.8,17.8,34-48-62-100-39.67-47-64-47C932,315,936.84,319.17,921,342Z"></path>
+			</g>
+			<g id="弗恩利多">
+				<path class="cls-1" d="M833,462c-20,21-44.79,3.95-33,24,10,17-.24,22-17,22-17,0-16,17.23,4,18,26,1,11,29.37,50,20,25-6,38,17,59-20,29.59-52.13-3-25-14-38s-16-33-28-33S838.85,455.86,833,462Z"></path>
+			</g>
+			<g id="卡達">
+				<path class="cls-1" d="M223,471c-30.83,3.25-35,28-35,28s-.83,7.51,18,5c15-2,6.59,24.13,30,20,17-3,13.67,16.6,2,29-8,8.5,1.9,56,18,53s38.41-56.39,49-57c35-2,33.91-17.91,12-17-24,1-22.13-94.13-42-75C248,483,242,469,223,471Z"></path>
+			</g>
+			<g id="法布里">
+				<path class="cls-1" d="M91,597c22,100,29,25,46,74,4.47,12.88,13-7.81,21,15,7,20,48.14-53,73-76,13-12-12-44,2-59,13.84-14.83,10.2-23.85-4-22-23,3-6-25-37-20-9.87,1.59-13-29-44-17-14.57,5.64,12,8,0,32S91,597,91,597Z"></path>
+			</g>
+			<g id="艾肯非爾斯">
+				<path class="cls-1" d="M292,461c5.38,8.37,16,63,23,66s18.05-1.1,20,5c8,25,37,6,80,13,21.31,3.47,51-59,36-59-22,0,2-18,2-29,0-27-12.21-20-39-21-52-2-33.36,9.1-54,15C318,463,283,447,292,461Z"></path>
+			</g>
+			<g id="普裡克">
+				<path class="cls-1" d="M500,317c16,40,24,25,32,30s11,18,36,17,18,3,10,20c-7.25,15.41,17.57,11.6-22,54-8.19,8.78-37.16,30-49,56-5,11-49,11-48-4,1.31-19.65-25,6-1-30,8.19-12.29-19-25-1-44,11.67-12.32-6.36-22.16,10-40,11-12-10-14,4-34,7.48-10.68-8.65-22.7-2-36C485,274,491,294.44,500,317Z"></path>
+			</g>
+			<g id="阿塔西亞斯">
+				<path class="cls-1" d="M568,434c-34,29-27,33-4,30s31-34,46-5c11.94,23.09,16.64-9.26,33,19,11,19,10.77-10.41,26-11,26-1,39.94-16.31,36-27-11.37-30.87,28-34,12-59-9.94-15.53,20.07-27.1,0-41-39-27-45.9,29.44-67,26-49-8-15-15-20-35-4-15.91-50,45-47,61S581.55,422.45,568,434Z"></path>
+			</g>
+			<g id="塔羅">
+				<path class="cls-1" d="M515,652c-22.35,2.48-51-86-71-109-7.14-8.21,8.48-25.35,13.53-37a5.72,5.72,0,0,1,6.92-3.21C527.61,522.16,519,458,541,466c46.23,16.81,48-37,67-3,16,28.63-30.84,31.4-11,72s69.4-15.76,42,41c-28,58-28.44,14-50,48-26,41-35.08,25.82-43,41C534,688,524,651,515,652Z"></path>
+			</g>
+			<g id="布林多斯特">
+				<path class="cls-1" d="M597,513c-3.23,6.52,8,36,23,33,71.58-14.32,118,27,119-38,.4-26-29-10-34-28-4.15-15-36.47-10.64-42-3C629,524,646,414,597,513Z"></path>
+			</g>
+			<g id="阿爾卡巴">
+				<path class="cls-2" d="M704,471c17,26,18,4,38,27,10.25,11.79,54,8,57,0,1.89-5-12-20-6-24,14.81-9.88,25,0,33-13,14.31-23.25,48,7,21-32-6-8.59-12.68-24.64-1-41,5-7-117-8-118-2-5.78,34.7-22.84,26.75-18,50C715.12,460.55,692.77,453.83,704,471Z"></path>
+			</g>
+			<g id="克萊門斯">
+				<path class="cls-2" d="M720,373c-2.55-6.2,28.52-26.37-9-42-19.8-8.24-25,1.63.48-36.18S726,260.54,753,261c59,1-14,30,29,38,37.82,7,26-19.33,47-17,18,2,19-30,48-9,20.65,14.95-2.64,28.75,7.8,46.36C900,345,939,318,903,355c-20.37,20.93,37,29-88,22C723.87,371.9,727,390,720,373Z"></path>
+			</g>
+			<g id="科薩">
+				<path class="cls-1" d="M641,359c17,4,21.14-.91,38.7-28.85C715,274,726,280,713,256c-15.34-28.32-20,6-36-29-13.39-29.29-19.07-5.24-35-28-7.45-10.64-29-11-39,15-5.87,15.26,23,33,11,49-17.4,23.2,35,54,19,82C625,359,629.16,356.21,641,359Z"></path>
+			</g>
+			<g id="米諾">
+				<path class="cls-1" d="M526,341c24-1,7,27,65,16,30-43,46.58-28,23-62-25-36,17-33-13-62-2-2-51-8-51,0-41,73-43,31-58,49C498,301,514.83,341.47,526,341Z"></path>
+			</g>
+			<g id="蒂格納">
+				<path class="cls-1" d="M471,221c26.2,0,0,18.34,44,20,51.36,1.94,2.24-23.35,74.67-14.91a7,7,0,0,0,7.69-6.17c2.09-19.51,12.65-25,16.14-32,2.5-5-1.3-10.93-6.9-11.13C495.74,172.8,541.47,194,513,195c-22.79.79-11,13-35,14C447.76,210.26,462,221,471,221Z"></path>
+			</g>
+			<g id="徹恩">
+				<path class="cls-1" d="M452,171c-16,8,9,17-8,23-16.79,5.93-19,11.12,6,12,57,2,31-13,63-16,10-.94,6-14,33-16,7-.52-3-24-9-23-12.82,2.14-21-3-12-16s0-16-14-44C508.14,85.27,470.42,161.79,452,171Z"></path>
+			</g>
+			<g id="珀斯">
+				<path class="cls-1" d="M356,191c6,26,17.2,23.37,37.1,15.18S418,214,429,196c3.34-5.47,13.4-5.17,15-8,3.66-6.48-10-9,6-20,14-9.65,47-61,47-71s-16.11-30-22.5-30.5c-27-2-24.5-1.5-21.5,9.5,2.71,9.93-28,33-15,37,12.82,4-3.23,17.5-19,14-18-4-2,12-22,16C391,144.19,355.07,187,356,191Z"></path>
+			</g>
+			<g id="博爾沃德">
+				<path class="cls-1" d="M425,123c11.55,0,13.6-3,11-6-1.45-1.65-6.4-1.67-7-5-2-11,25.83-26.62,16-43-1.5-2.5-16.5-4.5-20,4.51S354,97,343,78c-2.51-4.33-16-9-1,35,16,47,24.53,16.3,35,32,2,3,5,4,12-3,8.86-8.86,15-1,16-12C406.43,114.25,422,123,425,123Z"></path>
+			</g>
+			<g id="赫拉菲爾斯">
+				<path class="cls-1" d="M230,300s42-15,43,20c15-14,42,3,27-25-12.67-23.65,8-21,4-43s10-20,8-31c-25,10-8-11-29-13-22-2.09-6-12-26-15-22.31-3.35-13-31-36-9-19.42,18.57,15,36-12,37-14,.52-22,5-20,13C220,227,210,251,230,300Z"></path>
+			</g>
+			<g id="豪什瓦德">
+				<path class="cls-1" d="M308,252c4,22-12.21,24.57-6,37,8,16,7,19,6,24,2.94.49,11,2.88,19-7,13-16,16,4,30-26,44.8-22.4,18,12,44,5,12.21-3.29,79.32,1.84,83-2,23-24,23,6,45-26,16-23.32-36.08-.69-46-23-8-18-18.69.61-28-18-5-10-57.76-6.4-67-3-19,7-29.39,6-33-12-18,5-17-11-35,19C318,229,305.12,236.14,308,252Z"></path>
+			</g>
+			 <g id="map_en_name" class="map_name">
+				<text class="cls-12" transform="translate(357.89 110.51)">
+					Csalitos
+				</text>
+				<text class="cls-13" transform="translate(414.89 153.51)">
+					Ovaros
+				</text>
+				<text class="cls-12" transform="translate(479.89 171.51)">
+					Egerfa
+				</text>
+				<text class="cls-13" transform="translate(524.89 211.51)">
+					Vaja
+				</text>
+				<text class="cls-12" transform="translate(535 301.51)">
+					Szalonta
+				</text>
+				<text class="cls-12" transform="translate(390 251.71)">
+					Riba
+				</text>
+				<text class="cls-12" transform="translate(235 253.19)">
+					Puszta
+				</text>
+				<text class="cls-13" transform="translate(125.37 324.8)">
+					Kiralyfalva
+				</text>
+				<text class="cls-12" transform="translate(182.87 369.3)">
+					Ruda
+				</text>
+				<text class="cls-13" transform="translate(252.5 390.32)">
+					Gyoma
+				</text>
+				<text class="cls-12" transform="translate(383.89 367.51)">
+					Brina
+				</text>
+				<text class="cls-13" transform="translate(485.89 410.51)">
+					Vashegy
+				</text>
+				<text class="cls-13" transform="translate(332.89 496.51)">
+					Tabori Var
+				</text>
+				<text class="cls-12" transform="translate(247.89 513.51)">
+					Gat
+				</text>
+				<text class="cls-13" transform="translate(130 590.51)">
+					Mehkerek
+				</text>
+				<text class="cls-12" transform="translate(260 631.51)">
+					Nyirle
+				</text>
+				<text class="cls-13" transform="translate(265 689.51)">
+					Hadur Varos
+				</text>
+				<text class="cls-12" transform="translate(375 620.51)">
+					Kilenc Kocsma
+				</text>
+				<text class="cls-12" transform="translate(515 567.51)">
+					Molnar
+				</text>
+				<text class="cls-13" transform="translate(622.89 519.51)">
+					Ratot Var
+				</text>
+				<text class="cls-13" transform="translate(620 419.51)">
+					Horka
+				</text>
+				<text class="cls-12" transform="translate(625 277.51)">
+					Kovacsfalva
+				</text>
+				<text class="cls-13" transform="translate(730 236.51)">
+					Rozsdaskaszat
+				</text>
+				<text class="cls-12" transform="translate(704.89 178.51)">
+					Csorna
+				</text>
+				<text class="cls-12" transform="translate(649.89 133.51)">
+					Magocs
+				</text>
+				<text class="cls-13" transform="translate(570 95.51)">
+					Heviz
+				</text>
+				<text class="cls-12" transform="translate(673.89 50.51)">
+					Sovica
+				</text>
+				<text class="cls-13" transform="translate(725 118)">
+					Fehelovak
+				</text>
+				<text class="cls-12" transform="translate(780 80)">
+					Malomko
+				</text>
+				<text class="cls-12" transform="translate(855 129.51)">
+					Borona
+				</text>
+				<text class="cls-12" transform="translate(935 75.51)">
+					Kistemplom
+				</text>
+				<text class="cls-12" transform="translate(1050.89 55.51)">
+					Vaseke
+				</text>
+				<text class="cls-13" transform="translate(980.89 132.51)">
+					Kisber
+				</text>
+				<text class="cls-12" transform="translate(937.89 205.51)">
+					Bejarat
+				</text>
+				<text class="cls-13" transform="translate(950 255)">
+					Herceg Vara
+				</text>
+				<text class="cls-12" transform="translate(1085.89 264.51)">
+					Hatar
+				</text>
+				<text class="cls-12" transform="translate(1092.89 193.51)">
+					Tavasz
+				</text>
+				<text class="cls-12" transform="translate(1208 216.51)">
+					Delretek
+				</text>
+				<text class="cls-13" transform="translate(1174.89 330)">
+					Tura
+				</text>
+				<text class="cls-13" transform="translate(1085 360)">
+					Arany Pajzsok
+				</text>
+				<text class="cls-12" transform="translate(1142.89 463.51)">
+					Teliver
+				</text>
+				<text class="cls-13" transform="translate(1062.89 479.51)">
+					Hatvan
+				</text>
+				<text class="cls-12" transform="translate(1045 390)">
+					Vajkfalva
+				</text>
+				<text class="cls-12" transform="translate(925 370.51)">
+					Szalmabalak
+				</text>
+				<text class="cls-12" transform="translate(905 285)">
+					Rezhegy
+				</text>
+				<text class="cls-14" transform="translate(745 345)">
+					Turul Varos
+				</text>
+				<text class="cls-12" transform="translate(749.89 439.51)">
+					Halasto
+				</text>
+				<text class="cls-13" transform="translate(810.89 513.51)">
+					Solti Var
+				</text>
+				<text class="cls-12" transform="translate(917.89 467.51)">
+					Erc
+				</text>
+				<text class="cls-12" transform="translate(890 585.51)">
+					Keleti Csarda
+				</text>
+				<text class="cls-13" transform="translate(790 613.51)">
+					Hosvarosa
+				</text>
+				<text class="cls-12" transform="translate(705 637.51)">
+					Tiztas
+				</text>
+			</g>
+			<g id="map_zh_name" class="map_name">
+				<text class="cls-12" transform="translate(357.89 110.51)">
+					博爾沃德
+				</text>
+				<text class="cls-13" transform="translate(414.89 153.51)">
+					珀斯
+				</text>
+				<text class="cls-12" transform="translate(479.89 171.51)">
+					徹恩
+				</text>
+				<text class="cls-13" transform="translate(524.89 211.51)">
+					蒂格納
+				</text>
+				<text class="cls-12" transform="translate(544.89 301.51)">
+					米諾
+				</text>
+				<text class="cls-12" transform="translate(367.3 251.71)">
+					豪什瓦德
+				</text>
+				<text class="cls-12" transform="translate(224.45 253.19)">
+					赫拉菲爾斯
+				</text>
+				<text class="cls-13" transform="translate(155.37 324.8)">
+					漢斯
+				</text>
+				<text class="cls-12" transform="translate(182.87 369.3)">
+					瓦勒海姆
+				</text>
+				<text class="cls-13" transform="translate(252.5 390.32)">
+					維斯貝格
+				</text>
+				<text class="cls-12" transform="translate(383.89 367.51)">
+					布裡納
+				</text>
+				<text class="cls-13" transform="translate(485.89 410.51)">
+					普裡克
+				</text>
+				<text class="cls-13" transform="translate(332.89 496.51)">
+					艾肯非爾斯
+				</text>
+				<text class="cls-12" transform="translate(247.89 513.51)">
+					卡達
+				</text>
+				<text class="cls-13" transform="translate(143.89 590.51)">
+					法布里
+				</text>
+				<text class="cls-12" transform="translate(265.89 631.51)">
+					米拉
+				</text>
+				<text class="cls-13" transform="translate(284.89 689.51)">
+					阿拉瓦奇
+				</text>
+				<text class="cls-12" transform="translate(403.89 620.51)">
+					卡多
+				</text>
+				<text class="cls-12" transform="translate(530.89 567.51)">
+					塔羅
+				</text>
+				<text class="cls-13" transform="translate(622.89 519.51)">
+					布林多斯特
+				</text>
+				<text class="cls-13" transform="translate(605.89 419.51)">
+					阿塔西亞斯
+				</text>
+				<text class="cls-12" transform="translate(644.89 277.51)">
+					科薩
+				</text>
+				<text class="cls-13" transform="translate(771.89 236.51)">
+					克洛諾
+				</text>
+				<text class="cls-12" transform="translate(704.89 178.51)">
+					白格納
+				</text>
+				<text class="cls-12" transform="translate(649.89 133.51)">
+					蒙特博姆
+				</text>
+				<text class="cls-13" transform="translate(552.89 95.51)">
+					安科德貝克
+				</text>
+				<text class="cls-12" transform="translate(673.89 50.51)">
+					索維卡
+				</text>
+				<text class="cls-13" transform="translate(742.89 111.51)">
+					莫里
+				</text>
+				<text class="cls-12" transform="translate(795.89 82.51)">
+					迪斯
+				</text>
+				<text class="cls-12" transform="translate(867.89 129.51)">
+					瓦裡
+				</text>
+				<text class="cls-12" transform="translate(959.89 75.51)">
+					卡拉
+				</text>
+				<text class="cls-12" transform="translate(1050.89 55.51)">
+					卡摩爾
+				</text>
+				<text class="cls-13" transform="translate(980.89 132.51)">
+					凱爾佳
+				</text>
+				<text class="cls-12" transform="translate(937.89 205.51)">
+					塔克尼費爾
+				</text>
+				<text class="cls-13" transform="translate(989.89 258.51)">
+					蘇瓦基
+				</text>
+				<text class="cls-12" transform="translate(1085.89 264.51)">
+					裡斯沃
+				</text>
+				<text class="cls-12" transform="translate(1092.89 193.51)">
+					布部林
+				</text>
+				<text class="cls-12" transform="translate(1221.89 216.51)">
+					杜敏
+				</text>
+				<text class="cls-13" transform="translate(1174.89 334.51)">
+					拓倫
+				</text>
+				<text class="cls-13" transform="translate(1114.89 369.51)">
+					謝爾瑪
+				</text>
+				<text class="cls-12" transform="translate(1142.89 463.51)">
+					雷步爾
+				</text>
+				<text class="cls-13" transform="translate(1062.89 479.51)">
+					登克爾
+				</text>
+				<text class="cls-12" transform="translate(1050.89 378.51)">
+					普洛克
+				</text>
+				<text class="cls-12" transform="translate(939.89 370.51)">
+					茲拉赫
+				</text>
+				<text class="cls-12" transform="translate(913.89 282.51)">
+					圖和拉
+				</text>
+				<text class="cls-14" transform="translate(760.89 339.51)">
+					克萊門斯
+				</text>
+				<text class="cls-12" transform="translate(749.89 439.51)">
+					阿爾卡巴
+				</text>
+				<text class="cls-13" transform="translate(810.89 513.51)">
+					弗恩利多
+				</text>
+				<text class="cls-12" transform="translate(917.89 467.51)">
+					努爾圖
+				</text>
+				<text class="cls-12" transform="translate(907.89 585.51)">
+					凡爾漢姆
+				</text>
+				<text class="cls-13" transform="translate(778.89 613.51)">
+					烏爾茲菲爾斯
+				</text>
+				<text class="cls-12" transform="translate(684.89 637.51)">
+					安托克斯爾
+				</text>
+			</g>
+			<g id="map_jp_name" class="map_name">
+				<text class="cls-12" transform="translate(357.89 110.51)">
+					ブローダ
+				</text>
+				<text class="cls-13" transform="translate(414.89 153.51)">
+					ポース
+				</text>
+				<text class="cls-12" transform="translate(479.89 171.51)">
+					チャオン
+				</text>
+				<text class="cls-13" transform="translate(524.89 211.51)">
+					ディグナ
+				</text>
+				<text class="cls-12" transform="translate(544.89 301.51)">
+					ミノー
+				</text>
+				<text class="cls-12" transform="translate(367.3 251.71)">
+					ハスヴァルト
+				</text>
+				<text class="cls-12" transform="translate(224.45 253.19)">
+					フラフェル
+				</text>
+				<text class="cls-13" transform="translate(155.37 324.8)">
+					ハンス
+				</text>
+				<text class="cls-12" transform="translate(182.87 369.3)">
+					ヴァラハイム
+				</text>
+				<text class="cls-13" transform="translate(252.5 390.32)">
+					ウィスベック
+				</text>
+				<text class="cls-12" transform="translate(383.89 367.51)">
+					ボリーナ
+				</text>
+				<text class="cls-13" transform="translate(485.89 410.51)">
+					ブリーク
+				</text>
+				<text class="cls-13" transform="translate(332.89 496.51)">
+					アカンフェルス
+				</text>
+				<text class="cls-12" transform="translate(247.89 513.51)">
+					カルダ
+				</text>
+				<text class="cls-13" transform="translate(143.89 590.51)">
+					ファブリー
+				</text>
+				<text class="cls-12" transform="translate(265.89 631.51)">
+					ミラー
+				</text>
+				<text class="cls-13" transform="translate(284.89 689.51)">
+					アラヴァク
+				</text>
+				<text class="cls-12" transform="translate(403.89 620.51)">
+					カドゥ
+				</text>
+				<text class="cls-12" transform="translate(530.89 567.51)">
+					タロン
+				</text>
+				<text class="cls-13" transform="translate(622.89 519.51)">
+					ブルドスタ
+				</text>
+				<text class="cls-13" transform="translate(605.89 419.51)">
+					アタシアス
+				</text>
+				<text class="cls-12" transform="translate(644.89 277.51)">
+					クーサ
+				</text>
+				<text class="cls-13" transform="translate(771.89 236.51)">
+					クローナ
+				</text>
+				<text class="cls-12" transform="translate(704.89 178.51)">
+					バイグナ
+				</text>
+				<text class="cls-12" transform="translate(649.89 133.51)">
+					モンタボン
+				</text>
+				<text class="cls-13" transform="translate(552.89 95.51)">
+					アンクドベク
+				</text>
+				<text class="cls-12" transform="translate(673.89 50.51)">
+					ソヴィカ
+				</text>
+				<text class="cls-13" transform="translate(742.89 111.51)">
+					モリー
+				</text>
+				<text class="cls-12" transform="translate(795.89 82.51)">
+					ディース
+				</text>
+				<text class="cls-12" transform="translate(867.89 129.51)">
+					ワーリ
+				</text>
+				<text class="cls-12" transform="translate(959.89 75.51)">
+					カーラ
+				</text>
+				<text class="cls-12" transform="translate(1050.89 55.51)">
+					カモーレ
+				</text>
+				<text class="cls-13" transform="translate(980.89 132.51)">
+					カールシャ
+				</text>
+				<text class="cls-12" transform="translate(937.89 205.51)">
+					タクニフェル
+				</text>
+				<text class="cls-13" transform="translate(989.89 258.51)">
+					スヴァク
+				</text>
+				<text class="cls-12" transform="translate(1085.89 264.51)">
+					リゾー
+				</text>
+				<text class="cls-12" transform="translate(1092.89 193.51)">
+					ブーブリニ
+				</text>
+				<text class="cls-12" transform="translate(1221.89 216.51)">
+					ドミン
+				</text>
+				<text class="cls-13" transform="translate(1174.89 334.51)">
+					トルン
+				</text>
+				<text class="cls-13" transform="translate(1114.89 369.51)">
+					シャルマン
+				</text>
+				<text class="cls-12" transform="translate(1142.89 463.51)">
+					レブル
+				</text>
+				<text class="cls-13" transform="translate(1062.89 479.51)">
+					ドークル
+				</text>
+				<text class="cls-12" transform="translate(1050.89 378.51)">
+					ブローク
+				</text>
+				<text class="cls-12" transform="translate(939.89 370.51)">
+					ツラフ
+				</text>
+				<text class="cls-12" transform="translate(913.89 282.51)">
+					トフラ
+				</text>
+				<text class="cls-14" transform="translate(760.89 339.51)">
+					クレメンス
+				</text>
+				<text class="cls-12" transform="translate(749.89 439.51)">
+					アルカバ
+				</text>
+				<text class="cls-13" transform="translate(810.89 513.51)">
+					フェンリド
+				</text>
+				<text class="cls-12" transform="translate(917.89 467.51)">
+					ヌルトゥ
+				</text>
+				<text class="cls-12" transform="translate(907.89 585.51)">
+					ファルハム
+				</text>
+				<text class="cls-13" transform="translate(778.89 613.51)">
+					ウーズフェル
+				</text>
+				<text class="cls-12" transform="translate(684.89 637.51)">
+					アントクス
+				</text>
+			</g>
+		</svg>
+	</section>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js">
+	</script> 
+	<script>
+		function converDownload() {
+			var svg = document.querySelector("svg");
+			var svgData = new XMLSerializer().serializeToString(svg);
+			var canvas = document.createElement("canvas");
+			canvas.width = svg.width.baseVal.value;
+			canvas.height = svg.height.baseVal.value;
+			var ctx = canvas.getContext("2d");
+			var image = new Image;
+			image.onload = function() {
+				ctx.drawImage(image, 0, 0);
+				var a = document.createElement("a");
+				a.href = canvas.toDataURL("image/png");
+				a.setAttribute("download", "Ungverija.png");
+				a.dispatchEvent(new MouseEvent("click"));
+			}
+			image.src = "data:image/svg+xml;charset=utf-8;base64," + btoa(unescape(encodeURIComponent(svgData)));
+		}
+	</script> 
+	<script>
+		var fill = 'cls-1';
+		$('.cls-11').click(function() {
+			if ($("#edit_input").val() != "") {
+				$(this).text($("#edit_input").val());
+				$("#edit_input").val("");
+			}
+		})
+		$('rect').click(function() {
+			fill = $(this).attr('class');
+    		})
+		$('rect ~ text').click(function() {
+			fill = $(this).prev().attr('class');
+		})
+		$('path').click(function() {
+			$(this).attr('class', fill);
+		})
+		$('input:not(#edit_input)').click(function() {
+			$('.map_name').attr('style', 'display:none;')
+			if ($(this).attr('value') == 'en') {
+				$('#map_en_name').attr('style', 'display:block;')
+			}
+			if ($(this).attr('value') == 'zh') {
+				$('#map_zh_name').attr('style', 'display:block;')
+			}
+			if ($(this).attr('value') == 'jp') {
+				$('#map_jp_name').attr('style', 'display:block;')
+			}
+		})
+	</script> 
+</body>
+</html>
